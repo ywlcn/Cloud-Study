@@ -105,15 +105,15 @@
 
   お客様の施設から AWS リージョンへのネットワーク接続を確立
 
-  ![](.\images\AWSDirectConnect.png)
+  ![](images/AWSDirectConnect.png)
 
 - AWS Global Accelerator 
 
   ALB、NLB、EC2の前段に置いてアプリケーションの可用性とパフォーマンスを改善するサービス
 
-  ![](.\images\global-accelerator-before.png)
+  ![](images/global-accelerator-before.png)
 
-  ![](.\images\global-accelerator-after.png)
+  ![](images/global-accelerator-after.png)
 
 - Amazon Route 53 
 
@@ -127,7 +127,7 @@
 
 - 比較
 
-  ![](.\images\vgw-dgw-tgw.png)
+  ![](images/vgw-dgw-tgw.png)
 
    Transit Gateway       Direct Connect Gateway(DXGW)      Virtual Gateway   
 
@@ -239,16 +239,16 @@ Amazon FSx for Windows File Server – Designed to support SMB file shares in a 
 
 # 4 リソース
 
-blog推荐
+ 
 
-http://jayendrapatil.com/   （多人强烈推荐）
+http://jayendrapatil.com/    
 
  
 
-免费
+ 
 
 www.briefmenow.org/amazon
 
 https://awsjp.com/
 
-https://www.lleicloud.com/index.php/aws-certified-solutions-architect-practice-tests/  （官方指导测试题2019版 1000+道）
+https://www.lleicloud.com/index.php/aws-certified-solutions-architect-practice-tests/  
