@@ -1,6 +1,8 @@
 
 
+Cloud 全体Map
 
+![](images\aws-map.jpg)
 
 
 
@@ -21,26 +23,51 @@
 - ストレージ
 
 # 2 AWS のサービスと機能 
-## 2.1 アナリティクス: 
-- Amazon Athena 
+## 2.1 アナリティクス
 - Amazon Elasticsearch Service (Amazon ES) 
 - Amazon EMR 
 - AWS Glue 
-- Amazon Kinesis 
-- Amazon QuickSight 
-## 2.2 AWS の請求情報とコスト管理: 
+- Amazon Kinesis ストリーミング処理
+- Amazon Athena  S3をデータベースとしてSQL文で検索など
+- Amazon QuickSight　データ可視化ツール
+## 2.2 AWS の請求情報とコスト管理
 - AWS Budgets 
 - Cost Explorer 
 
-## 2.3 アプリケーション統合: 
+## 2.3 アプリケーション統合
 
 - Amazon Simple Notification Service (Amazon SNS) 
+
+  サブスクライブしているエンドポイントまたはクライアントへのメッセージの配信または送信を、調整および管理するウェブサービス
+
+  ![](\images\Amazon-SNS.png)
+
 - Amazon Simple Queue Service (Amazon SQS) 
 
-## 2.4 コンピューティング: 
+  ![](images\Amazon-SQS.png)
+
+
+
+
+
+- SQS　VS　SNS
+
+  - SQS：キューを `ポーリング` して取得する キューイングサービス
+
+    ![](images\Amazon-SQS-1.png)
+
+  - SNS：メッセージを `プッシュ式` で送る メッセージングサービス
+
+    ![](images\Amazon-SNS-1.png)
+
+## 2.4 コンピューティング
 - Amazon EC2 
 
 - AWS Elastic Beanstalk 
+
+  各種サーバを提供している。Javaを例すると、Warをアップロードすれば、起動できます。起動必要なものを全部AWBより提供する。
+
+  - 自動的に、**EC2 instance**　**Instance security group**　**Load balancer**　**Load balancer security group**　**Auto Scaling group**　**Amazon S3 bucket**　**Amazon CloudWatch alarms**　**Amazon CloudFormation stack**　**Domain name** 　が生成される
 
 - Amazon Elastic Container Service (Amazon ECS) 
 
@@ -53,13 +80,29 @@
 - AWS Fargate 
 
 - AWS Lambda
-## 2.5 データベース: 
+## 2.5 データベース
 - Amazon Aurora 
+
+  AWS独自のRDS、Mysql、Postgresと交換している。ReadDBとWriteDB　3箇所AZ
+
 - Amazon DynamoDB 
+
+  NosqlDB　　自動3箇所AZ　グローバルテーブル　「DynamoDB ストリーム」
+
 - Amazon ElastiCache 
+
+  インメモリDB
+
 - Amazon RDS 
+
 - Amazon Redshift 
-## 2.6 マネジメント、ガバナンス: 
+
+  データハウス
+
+- Amazon Neptune   フルマネージド　グラフDB Service
+
+  
+## 2.6 マネジメント、ガバナンス
 - AWS Auto Scaling 
 
 - AWS Backup 
@@ -70,7 +113,13 @@
 
 - AWS CloudTrail 
 
+  AWS CloudTrail は、AWS アカウントのガバナンス、コンプライアンス、および運用とリスクの監査を行えるように支援する AWS のサービスです。ユーザー、ロール、または AWS のサービスによって実行されたアクションは、CloudTrail にイベントとして記録されます。イベントには、AWS Management Console、AWS Command Line Interface、および AWS SDK と API で実行されたアクションが含まれます。
+
 - Amazon CloudWatch 
+
+  メトリクス監視、標準：CPU使用率　DiskReadOps（読み回数）　DiskReadBytes(読むバイト数) 　NetWorkIn（受信バイト数）
+
+  5分間無料（サービスごと異なる）、15カ月
 
 - AWS Config 
 
@@ -84,7 +133,15 @@
 
 - AWS Trusted Advisor 
 
-## 2.7 移行、転送: 
+
+
+### 2.6.1 CloudTrail VS  AWS Config 
+
+- CloudTrail : `ユーザの操作に対して` モニタリングをし、不正なことが起こってないかを確認する
+- Config : `リソースに対して` モニタリングをし、決定されたガイドラインに沿ってるかの確認を行う
+- 
+
+## 2.7 移行、転送
 - AWS Database Migration Service (AWS DMS) 
 - AWS DataSync 
 - AWS Migration Hub 
@@ -92,7 +149,7 @@
 - AWS Snowball 
 - AWS Transfer Family 
 
-## 2.8 ネットワーク、コンテンツ配信: 
+## 2.8 ネットワーク、コンテンツ配信
 - Amazon API Gateway 
 
   AWS Lambda、EC2、もしくはAWS外でパブリックとして公開されているアプリケーションをAPIとして公開する
@@ -133,7 +190,7 @@
 
 
 
-## 2.9 セキュリティ、アイデンティティ、コンプライアンス: 
+## 2.9 セキュリティ、アイデンティティ、コンプライアンス
 - AWS Certificate Manager (ACM) 
 
   ACMはSSL/TLSサーバー証明書を無料で発行できるサービス
@@ -158,7 +215,7 @@
 
 - AWS WAF 
 
-## 2.10 ストレージ:  2021/12/05
+## 2.10 ストレージ
 
 
 
@@ -210,21 +267,39 @@
 
 - AWS Storage Gateway
 
+  |                                  |                                                              |      |
+  | -------------------------------- | ------------------------------------------------------------ | ---- |
+  | ファイルゲートウェイ             |                                                              |      |
+  | キャッシュボリュームゲートウェイ | オンプレミスのアプリケーションサーバーから iSCSI (Internet Small Computer System Interface) デバイスとしてマウントできる |      |
+  | 保管ボリュームゲートウェイ       |                                                              |      |
+  | テープゲートウェイ               |                                                              |      |
+
+  
 
 
-Amazon EBS – Designed to support block storage volumes with Amazon EC2 instances
 
-Amazon S3 – Designed to support millions of storage objects and accessed using REST APIs
 
-Amazon EFS – Designed as a native Multi-AZ file system for NFS file shares
+
+Amazon EBS – EC2用仮想ハードディスク。EC2からマウントして使用。
+
+Amazon S3 – クラウド型オブジェクトストレージサービス。EC2と組み合わせて運用する場合はStorage Gatewayサービスを使用する。
+
+Amazon EFS – EC2用のNAS相当。複数のEC2からのマウントが可能。Linux限定。 Multi-AZ file system for NFS file shares
 
 Amazon FSx for Lustre – Designed for distributed high performance computing workloads
 
-Amazon FSx for Windows File Server – Designed to support SMB file shares in a Single-AZ or Multi-AZ configuration
+Amazon FSx for Windows File Server – EFSのWindows対応版。OSがWindowsのEC2で使用。Designed to support SMB file shares in a Single-AZ or Multi-AZ configuration
 
 
 
-
+|                  | EBS      | EFS              | FSx           |
+| ---------------- | -------- | ---------------- | ------------- |
+| AZ               |          |                  | Multi・Single |
+| HDD/SSD          | HDD・SSD |                  | HDD・SSD      |
+| 作成後サイズ調整 | 可能     | 自動スケーリング | できない      |
+| プロトコル       | ー       | NFS              | SMB           |
+|                  |          |                  |               |
+|                  |          |                  |               |
 
 
 
@@ -232,6 +307,18 @@ Amazon FSx for Windows File Server – Designed to support SMB file shares in a 
 
 - IOPS    Input/Output Per Second
 - SAN     Storage Area Network
+
+
+
+AWS STS はAWS Security Token Service
+
+# 4 各種ゲートウェイ
+
+
+
+- インターネットゲートウェイ
+
+  インターネットゲートウェイは、VPC とインターネットとの間の通信を可能にする VPC コンポーネントであり、冗長性と高い可用性を備えており、水平スケーリングが可能です。
 
 
 
@@ -252,3 +339,19 @@ www.briefmenow.org/amazon
 https://awsjp.com/
 
 https://www.lleicloud.com/index.php/aws-certified-solutions-architect-practice-tests/  
+
+
+
+
+
+# 5 メモ
+
+## 5.1 サービス範囲
+
+- グローバルサービス
+
+- リージョンサービス
+
+- アベイラビリティゾーンサービス
+
+![](images\global-region-az-service.png)
