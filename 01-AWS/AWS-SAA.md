@@ -137,9 +137,13 @@ Cloud 全体Map
 
 ### 2.6.1 CloudTrail VS  AWS Config 
 
-- CloudTrail : `ユーザの操作に対して` モニタリングをし、不正なことが起こってないかを確認する
-- Config : `リソースに対して` モニタリングをし、決定されたガイドラインに沿ってるかの確認を行う
-- 
+- CloudTrail : `ユーザの操作に対して` モニタリングをし、不正なことが起こってないかを確認する       　　　 目的：人
+
+- Config : `リソースに対して` モニタリングをし、決定されたガイドラインに沿ってるかの確認を行う　　　　目的：リソース
+
+- Access Advisor　　Access AdvisorのLast Accessed DataにIAMエンティティ(ユーザー、グループ、ロール) が最後にAWSサービスにアクセスした⽇付と時刻が表⽰されます。AWS Identity and Access Management (IAM) アクセスアドバイザーでは、AWS コマンドラインインターフェイス (AWS CLI) または SDK で IAM アクセスアドバイザー API を使用することで、すべてのアカウントで IAM アクセス権限の分析を自動化できます。IAM アクセスアドバイザーは、サービスアクセス監査、不要なアクセス権限の削除、IAM エンティティ (ユーザー、ロール、グループなど) が AWS サービスに最終アクセスしたタイムスタンプ取得のための適切なアクセス権限の設定を支援します。
+
+  讲座 40：**IAMの概要** 已讨论了这一点
 
 ## 2.7 移行、転送
 - AWS Database Migration Service (AWS DMS) 
@@ -214,6 +218,8 @@ Cloud 全体Map
 - AWS Single Sign-On 
 
 - AWS WAF 
+
+- AWS Cognito
 
 ## 2.10 ストレージ
 
@@ -292,14 +298,15 @@ Amazon FSx for Windows File Server – EFSのWindows対応版。OSがWindowsのE
 
 
 
-|                  | EBS      | EFS              | FSx           |
-| ---------------- | -------- | ---------------- | ------------- |
-| AZ               |          |                  | Multi・Single |
-| HDD/SSD          | HDD・SSD |                  | HDD・SSD      |
-| 作成後サイズ調整 | 可能     | 自動スケーリング | できない      |
-| プロトコル       | ー       | NFS              | SMB           |
-|                  |          |                  |               |
-|                  |          |                  |               |
+|                  | EBS              | EFS                                              | FSx                   |
+| ---------------- | ---------------- | ------------------------------------------------ | --------------------- |
+| AZ               | AZ内冗長         | AZ間冗長                                         | Multi・Single         |
+| HDD/SSD          | HDD・SSD         |                                                  | HDD・SSD              |
+| 作成後サイズ調整 | 可能             | 自動スケーリング                                 | 可能                  |
+| プロトコル       | ー               | NFS                                              | SMB                   |
+| バックアップ     | スナップショット | スナップショットできない<br>AWS Backupと連携して | AWSへバックアップ可能 |
+| 暗号化           | 任意暗号化       | 任意暗号化                                       | 自動暗号化            |
+| 料金             | 安い             | 高い                                             | 中                    |
 
 
 
@@ -316,13 +323,15 @@ AWS STS はAWS Security Token Service
 
 
 
-- インターネットゲートウェイ
+- インターネットゲートウェイ（IGW）
 
-  インターネットゲートウェイは、VPC とインターネットとの間の通信を可能にする VPC コンポーネントであり、冗長性と高い可用性を備えており、水平スケーリングが可能です。
+  インターネットゲートウェイは、VPC とインターネットとの間の通信を可能にする VPC コンポーネントであり、冗長性と高い可用性を備えており、水平スケーリングが可能です。 VPCないで内部冗長性があり、一つだけよい（ELBも）
 
+- NATゲートウェイ（NAT）
 
+  プライベートサブネットからインターネットにアクセスできるためのリソース。AZ内で冗長となっていますが、AZ間の冗長がないため、複数AZがあれば、複数作成必要
 
-
+- Egress-Only インターネットゲートウェイ
 
 # 4 リソース
 
@@ -344,6 +353,30 @@ https://www.lleicloud.com/index.php/aws-certified-solutions-architect-practice-t
 
 
 
+
+
+## 4 AWS Route53
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 5 メモ
 
 ## 5.1 サービス範囲
@@ -355,3 +388,37 @@ https://www.lleicloud.com/index.php/aws-certified-solutions-architect-practice-t
 - アベイラビリティゾーンサービス
 
 ![](images\global-region-az-service.png)
+
+
+
+
+
+
+
+# TODO
+
+CloudFront 課金　構成　接続ポイント
+
+Hadoop　？？
+
+
+
+
+
+ELB で　SSL証明書をインストールして通信する　　　　ＡＣＭでＳＳＬ　　証明書管理のみ！！！
+
+
+
+
+
+
+
+Role 別のアカウントに付与する・・・
+
+
+
+
+
+AWS Organizations   Service  SCP
+
+->  権限の設定ではなくて、Policy自体は設定できない。設定済みのものは？　　　境界設定
